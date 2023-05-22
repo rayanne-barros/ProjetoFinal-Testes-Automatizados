@@ -102,7 +102,7 @@ public class LivroControllerTeste {
     public void livroSemTitulo() throws Exception {
         LivroDTO livroDTO = new LivroDTO();
 
-        livroDTO.setTitulo("");
+
         livroDTO.setResumo("Resumo menor que 500 caracteres");
         livroDTO.setSumario("1-Sumario 2- Sumario");
         livroDTO.setPreco(20.0);
@@ -189,6 +189,29 @@ public class LivroControllerTeste {
     }
 
     @Test
+    public void livroSemResumo() throws Exception {
+        LivroDTO livroDTO = new LivroDTO();
+
+        livroDTO.setTitulo("Titulo");
+        livroDTO.setSumario("1-Sumario 2- Sumario");
+        livroDTO.setPreco(20.0);
+        livroDTO.setPaginas(124);
+        livroDTO.setIsbn("85-98074");
+        livroDTO.setDataPublicacao(Date.valueOf(LocalDate.now().plusDays(2)));
+
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(livroDTO);
+
+        this.mockMvc
+                .perform(MockMvcRequestBuilders.post("/livro")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json)
+                )
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
+    @Test
     public void livroComPrecoMenorQuePermitido() throws Exception {
         LivroDTO livroDTO = new LivroDTO();
 
@@ -197,7 +220,30 @@ public class LivroControllerTeste {
         livroDTO.setSumario("1-Sumario 2- Sumario");
         livroDTO.setPreco(19.99);
         livroDTO.setPaginas(124);
-        livroDTO.setIsbn("85-98074");
+        livroDTO.setIsbn("85-98075");
+        livroDTO.setDataPublicacao(Date.valueOf(LocalDate.now().plusDays(2)));
+
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(livroDTO);
+
+        this.mockMvc
+                .perform(MockMvcRequestBuilders.post("/livro")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json)
+                )
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
+    @Test
+    public void livroSemPreco() throws Exception {
+        LivroDTO livroDTO = new LivroDTO();
+
+        livroDTO.setTitulo("Titulo");
+        livroDTO.setResumo("Resumo menor que 500 caracteres");
+        livroDTO.setSumario("1-Sumario 2- Sumario");
+        livroDTO.setPaginas(124);
+        livroDTO.setIsbn("85-98076");
         livroDTO.setDataPublicacao(Date.valueOf(LocalDate.now().plusDays(2)));
 
         ObjectMapper mapper = new ObjectMapper();
@@ -221,7 +267,30 @@ public class LivroControllerTeste {
         livroDTO.setSumario("1-Sumario 2- Sumario");
         livroDTO.setPreco(20.0);
         livroDTO.setPaginas(99);
-        livroDTO.setIsbn("85-98075");
+        livroDTO.setIsbn("85-98077");
+        livroDTO.setDataPublicacao(Date.valueOf(LocalDate.now().plusDays(2)));
+
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(livroDTO);
+
+        this.mockMvc
+                .perform(MockMvcRequestBuilders.post("/livro")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json)
+                )
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
+    @Test
+    public void livroSemNumeroDePaginas() throws Exception {
+        LivroDTO livroDTO = new LivroDTO();
+
+        livroDTO.setTitulo("Titulo");
+        livroDTO.setResumo("Resumo menor que 500 caracteres");
+        livroDTO.setSumario("1-Sumario 2- Sumario");
+        livroDTO.setPreco(20.0);
+        livroDTO.setIsbn("85-98078");
         livroDTO.setDataPublicacao(Date.valueOf(LocalDate.now().plusDays(2)));
 
         ObjectMapper mapper = new ObjectMapper();
@@ -245,7 +314,7 @@ public class LivroControllerTeste {
         livroDTO.setSumario("1-Sumario 2- Sumario");
         livroDTO.setPreco(20.0);
         livroDTO.setPaginas(124);
-        livroDTO.setIsbn("85-98076");
+        livroDTO.setIsbn("85-98079");
         livroDTO.setDataPublicacao(Date.valueOf(LocalDate.now()));
 
         ObjectMapper mapper = new ObjectMapper();
@@ -269,7 +338,7 @@ public class LivroControllerTeste {
         livroDTO.setSumario("1-Sumario 2- Sumario");
         livroDTO.setPreco(20.0);
         livroDTO.setPaginas(124);
-        livroDTO.setIsbn("85-98077");
+        livroDTO.setIsbn("85-98080");
         livroDTO.setDataPublicacao(Date.valueOf(LocalDate.now().minusDays(3)));
 
         ObjectMapper mapper = new ObjectMapper();
@@ -294,6 +363,29 @@ public class LivroControllerTeste {
         livroDTO.setPreco(20.0);
         livroDTO.setPaginas(124);
         livroDTO.setIsbn("");
+        livroDTO.setDataPublicacao(Date.valueOf(LocalDate.now().plusDays(2)));
+
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(livroDTO);
+
+        this.mockMvc
+                .perform(MockMvcRequestBuilders.post("/livro")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json)
+                )
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
+    @Test
+    public void livroSemIsbn() throws Exception {
+        LivroDTO livroDTO = new LivroDTO();
+
+        livroDTO.setTitulo("");
+        livroDTO.setResumo("Resumo menor que 500 caracteres");
+        livroDTO.setSumario("1-Sumario 2- Sumario");
+        livroDTO.setPreco(20.0);
+        livroDTO.setPaginas(124);
         livroDTO.setDataPublicacao(Date.valueOf(LocalDate.now().plusDays(2)));
 
         ObjectMapper mapper = new ObjectMapper();
