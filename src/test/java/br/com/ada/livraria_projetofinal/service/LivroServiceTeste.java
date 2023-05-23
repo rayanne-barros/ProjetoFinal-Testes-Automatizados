@@ -1,9 +1,6 @@
 package br.com.ada.livraria_projetofinal.service;
 
 import br.com.ada.livraria_projetofinal.model.dto.LivroDTO;
-import br.com.ada.livraria_projetofinal.model.mapper.LivroMapper;
-import br.com.ada.livraria_projetofinal.repository.LivroRepository;
-import br.com.ada.livraria_projetofinal.repository.LivroRepositoryTeste;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -11,8 +8,6 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 public class LivroServiceTeste {
-    private LivroMapper livroMapper = new LivroMapper();
-    private LivroRepository repository = new LivroRepositoryTeste();
 
     private LivroService service = new LivroService();
 
